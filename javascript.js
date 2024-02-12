@@ -9,13 +9,14 @@ display.innerHTML = displayValue;
 function changeDisplayValue(btnText){
     if (display.innerHTML == 0) {
         display.innerHTML = btnText;
+        displayValue = btnText;
     } else {
         display.innerHTML += btnText;
-        displayValue = btnText;
+        displayValue += btnText;
     }
 }
 
-let calcButtons = document.querySelectorAll(".calc-button");
+let calcButtons = document.querySelectorAll(".number");
 
 for (let i = 0; i < calcButtons.length; i++) {
     calcButtons[i].addEventListener('click', function () {
@@ -23,7 +24,22 @@ for (let i = 0; i < calcButtons.length; i++) {
     }, false);
 }
 
+let operators = document.querySelectorAll(".operator");
 
+for (let i = 0; i < operators.length; i++) {
+    operators[i].addEventListener('click', function () {
+        x = displayValue;
+        operator = operators[i].innerHTML;
+        display.innerHTML += operator;
+    }, false);
+}
+
+let equal = document.querySelector(".equal");
+
+equal.addEventListener("click", function () {
+    y = display.innerHTML.slice(x.length+1, display.innerHTML.length);
+    display.innerHTML = operate(operator, x, y);
+} , false);
 
 
 function add (x, y) {
