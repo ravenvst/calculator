@@ -43,7 +43,7 @@ equal.addEventListener("click", function () {
 
 
 function add (x, y) {
-    return (x + y);
+    return (+x + +y);
 }
 
 function subtract (x, y) {
