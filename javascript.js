@@ -3,15 +3,15 @@ let y = 0;
 let operator = "";
 let displayValue = 0;
 
-let display = document.getElementById("display")
-display.innerHTML = displayValue;
+let display2 = document.getElementById("display2")
+display2.innerHTML = displayValue;
 
 function changeDisplayValue(btnText){
-    if (display.innerHTML == 0) {
-        display.innerHTML = btnText;
+    if (display2.innerHTML == 0) {
+        display2.innerHTML = btnText;
         displayValue = btnText;
     } else {
-        display.innerHTML += btnText;
+        display2.innerHTML += btnText;
         displayValue += btnText;
     }
 }
@@ -30,15 +30,15 @@ for (let i = 0; i < operators.length; i++) {
     operators[i].addEventListener('click', function () {
         x = displayValue;
         operator = operators[i].innerHTML;
-        display.innerHTML += operator;
+        display2.innerHTML += operator;
     }, false);
 }
 
 let equal = document.querySelector(".equal");
 
 equal.addEventListener("click", function () {
-    y = display.innerHTML.slice(x.length+1, display.innerHTML.length);
-    display.innerHTML = operate(operator, x, y);
+    y = display2.innerHTML.slice(x.length+1, display2.innerHTML.length);
+    display2.innerHTML = operate(operator, x, y);
 } , false);
 
 
