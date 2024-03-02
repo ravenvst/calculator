@@ -43,6 +43,8 @@ for (let i = 0; i < operators.length; i++) {
             } else {
                 if (display1.innerHTML == "") {
                     display1.innerHTML = display2.innerHTML;
+                } else {
+                    display1.innerHTML += operator + y;
                 }
             
                 if (typeof(x) == "string") {
@@ -50,9 +52,11 @@ for (let i = 0; i < operators.length; i++) {
                 } else {
                     y = +display2.innerHTML.slice(x.toString().length+1, display2.innerHTML.length);
                 }
+                
                 x = +operate(operator, +x, +y);
                 operator = operators[i].innerHTML;
                 display2.innerHTML = x + operator;
+                
             }
         }
     }, false);
