@@ -21,6 +21,9 @@ let calcButtons = document.querySelectorAll(".number");
 for (let i = 0; i < calcButtons.length; i++) {
     calcButtons[i].addEventListener('click', function () {
         changeDisplayValue(calcButtons[i].innerHTML);
+        if (operator != "") {
+            y = +display2.innerHTML.slice(x.toString.length + 1, display2.innerHTML.length);
+        }
     }, false);
 }
 
@@ -28,16 +31,31 @@ let operators = document.querySelectorAll(".operator");
 
 for (let i = 0; i < operators.length; i++) {
     operators[i].addEventListener('click', function () {
-        x = displayValue;
-        operator = operators[i].innerHTML;
-        display2.innerHTML += operator;
+        if (operator === "") {
+            x = displayValue;
+            operator = operators[i].innerHTML;
+            display2.innerHTML += operator;
+        } else {
+            
+            display1.innerHTML = display2.innerHTML;
+            
+            y = +display2.innerHTML.slice(x.length+1, display2.innerHTML.length);
+            
+            x = +operate(operator, +x, +y);
+            operator = operators[i].innerHTML;
+            display2.innerHTML = x + operator;
+        }
     }, false);
 }
 
 let equal = document.querySelector(".equal");
 
 equal.addEventListener("click", function () {
-    y = display2.innerHTML.slice(x.length+1, display2.innerHTML.length);
+    if (typeof(x) == String) {
+        y = +display2.innerHTML.slice(x.length+1, display2.innerHTML.length);
+    } else {
+        y = +display2.innerHTML.slice(x.toString.length+1, display2.innerHTML.length);
+    }
     display2.innerHTML = operate(operator, x, y);
 } , false);
 
