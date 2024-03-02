@@ -4,6 +4,7 @@ let operator = "";
 let displayValue = 0;
 let result; 
 let opCount = 0;
+let usedEqual = false;
 
 let display2 = document.getElementById("display2")
 display2.innerHTML = displayValue;
@@ -47,15 +48,17 @@ for (let i = 0; i < operators.length; i++) {
                 if (display1.innerHTML == "") {
                     display1.innerHTML = display2.innerHTML;
                 } else {
-                    display1.innerHTML += operator + y;
+                    if (usedEqual === false) {
+                        display1.innerHTML += operator + y;
+                    }
                 }
-            
-                if (typeof(x) == "string") {
+                if (usedEqual === false) {
+                    if (typeof(x) == "string") {
                     y = +display2.innerHTML.slice(x.length+1, display2.innerHTML.length);
-                } else {
+                    } else {
                     y = +display2.innerHTML.slice(x.toString().length+1, display2.innerHTML.length);
+                    }
                 }
-
                 x = +operate(operator, +x, +y);
                 operator = operators[i].innerHTML;
                 display2.innerHTML = x + operator;
@@ -63,11 +66,13 @@ for (let i = 0; i < operators.length; i++) {
             }
         }
     }, false);
+usedEqual = false;
 }
 
 let equal = document.querySelector(".equal");
 
 equal.addEventListener("click", function () {
+    usedEqual = true;
     if (display2.innerHTML.slice(x.toString().length+1, display2.innerHTML.length) != ""){
         if (typeof(x) == String) {
             y = +display2.innerHTML.slice(x.length+1, display2.innerHTML.length);
@@ -136,4 +141,5 @@ function clear () {
     y = 0;
     operator = "";
     opCount = 0;
+    displayValue = 0;
 }
