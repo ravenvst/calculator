@@ -90,6 +90,10 @@ equal.addEventListener("click", function () {
 
 } , false);
 
+let buttonClear = document.querySelector(".clear");
+buttonClear.addEventListener("click", clear);
+
+
 
 function add (x, y) {
     return (+x + +y);
@@ -123,4 +127,13 @@ function operate (operator, number1, number2) {
             break;
     }
     
+}
+
+function clear () {
+    display1.innerHTML = "";
+    display2.innerHTML = 0;
+    x = 0;
+    y = 0;
+    operator = "";
+    opCount = 0;
 }
