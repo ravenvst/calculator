@@ -2,6 +2,7 @@ let x = 0;
 let y = 0;
 let operator = "";
 let displayValue = 0;
+let result; 
 
 let display2 = document.getElementById("display2")
 display2.innerHTML = displayValue;
@@ -52,7 +53,7 @@ for (let i = 0; i < operators.length; i++) {
                 } else {
                     y = +display2.innerHTML.slice(x.toString().length+1, display2.innerHTML.length);
                 }
-                
+
                 x = +operate(operator, +x, +y);
                 operator = operators[i].innerHTML;
                 display2.innerHTML = x + operator;
@@ -71,7 +72,14 @@ equal.addEventListener("click", function () {
         } else {
             y = +display2.innerHTML.slice(x.toString().length+1, display2.innerHTML.length);
         }
-        display2.innerHTML = operate(operator, x, y);
+        result = operate(operator, x, y);
+        if (Number.isInteger(result)) {
+            display2.innerHTML = operate(operator, x, y);
+        } else {
+            display2.innerHTML = operate(operator, x, y).toFixed(2);
+        }
+
+        
         display1.innerHTML += operator + y;
     }
 
