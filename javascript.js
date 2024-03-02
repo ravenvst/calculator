@@ -31,23 +31,29 @@ let operators = document.querySelectorAll(".operator");
 
 for (let i = 0; i < operators.length; i++) {
     operators[i].addEventListener('click', function () {
-        if (operator === "") {
-            x = displayValue;
-            operator = operators[i].innerHTML;
-            display2.innerHTML += operator;
-        } else {
-            if (display1.innerHTML == "") {
-                display1.innerHTML = display2.innerHTML;
-            }
-            
-            if (typeof(x) == "string") {
-                y = +display2.innerHTML.slice(x.length+1, display2.innerHTML.length);
+        if (display2.innerHTML.slice(x.toString().length, display2.innerHTML.length) !== "*" &&
+            display2.innerHTML.slice(x.toString().length, display2.innerHTML.length) !== "/" &&
+            display2.innerHTML.slice(x.toString().length, display2.innerHTML.length) !== "+" &&
+            display2.innerHTML.slice(x.toString().length, display2.innerHTML.length) !== "-" 
+        ) {
+            if (operator === "") {
+                x = displayValue;
+                operator = operators[i].innerHTML;
+                display2.innerHTML += operator;
             } else {
-                y = +display2.innerHTML.slice(x.toString().length+1, display2.innerHTML.length);
+                if (display1.innerHTML == "") {
+                    display1.innerHTML = display2.innerHTML;
+                }
+            
+                if (typeof(x) == "string") {
+                    y = +display2.innerHTML.slice(x.length+1, display2.innerHTML.length);
+                } else {
+                    y = +display2.innerHTML.slice(x.toString().length+1, display2.innerHTML.length);
+                }
+                x = +operate(operator, +x, +y);
+                operator = operators[i].innerHTML;
+                display2.innerHTML = x + operator;
             }
-            x = +operate(operator, +x, +y);
-            operator = operators[i].innerHTML;
-            display2.innerHTML = x + operator;
         }
     }, false);
 }
