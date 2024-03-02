@@ -34,35 +34,40 @@ let operators = document.querySelectorAll(".operator");
 
 for (let i = 0; i < operators.length; i++) {
     operators[i].addEventListener('click', function () {
-        opCount ++;
-        if (display2.innerHTML.slice(x.toString().length, display2.innerHTML.length) !== "*" &&
-            display2.innerHTML.slice(x.toString().length, display2.innerHTML.length) !== "/" &&
-            display2.innerHTML.slice(x.toString().length, display2.innerHTML.length) !== "+" &&
-            display2.innerHTML.slice(x.toString().length, display2.innerHTML.length) !== "-" 
-        ) {
-            if (operator === "") {
-                x = displayValue;
-                operator = operators[i].innerHTML;
-                display2.innerHTML += operator;
-            } else {
-                if (display1.innerHTML == "") {
-                    display1.innerHTML = display2.innerHTML;
+        if (operator === "/" && y == 0) {
+            display1.innerHTML = "";
+            display2.innerHTML = "NOPE :D";
+        } else {
+            opCount ++;
+            if (display2.innerHTML.slice(x.toString().length, display2.innerHTML.length) !== "*" &&
+                display2.innerHTML.slice(x.toString().length, display2.innerHTML.length) !== "/" &&
+                display2.innerHTML.slice(x.toString().length, display2.innerHTML.length) !== "+" &&
+                display2.innerHTML.slice(x.toString().length, display2.innerHTML.length) !== "-" 
+            ) {
+                if (operator === "") {
+                    x = displayValue;
+                    operator = operators[i].innerHTML;
+                    display2.innerHTML += operator;
                 } else {
-                    if (usedEqual === false) {
-                        display1.innerHTML += operator + y;
-                    }
-                }
-                if (usedEqual === false) {
-                    if (typeof(x) == "string") {
-                    y = +display2.innerHTML.slice(x.length+1, display2.innerHTML.length);
+                    if (display1.innerHTML == "") {
+                        display1.innerHTML = display2.innerHTML;
                     } else {
-                    y = +display2.innerHTML.slice(x.toString().length+1, display2.innerHTML.length);
+                        if (usedEqual === false) {
+                            display1.innerHTML += operator + y;
+                        }
                     }
-                }
-                x = +operate(operator, +x, +y);
-                operator = operators[i].innerHTML;
-                display2.innerHTML = x + operator;
+                    if (usedEqual === false) {
+                        if (typeof(x) == "string") {
+                        y = +display2.innerHTML.slice(x.length+1, display2.innerHTML.length);
+                        } else {
+                        y = +display2.innerHTML.slice(x.toString().length+1, display2.innerHTML.length);
+                        }
+                    }
+                    x = +operate(operator, +x, +y);
+                    operator = operators[i].innerHTML;
+                    display2.innerHTML = x + operator;
                 
+                }
             }
         }
     }, false);
@@ -72,26 +77,31 @@ usedEqual = false;
 let equal = document.querySelector(".equal");
 
 equal.addEventListener("click", function () {
-    usedEqual = true;
-    if (display2.innerHTML.slice(x.toString().length+1, display2.innerHTML.length) != ""){
-        if (typeof(x) == String) {
-            y = +display2.innerHTML.slice(x.length+1, display2.innerHTML.length);
-        } else {
-            y = +display2.innerHTML.slice(x.toString().length+1, display2.innerHTML.length);
-        }
-        result = operate(operator, x, y);
-        if (Number.isInteger(result)) {
-            display2.innerHTML = operate(operator, x, y);
-        } else {
-            display2.innerHTML = operate(operator, x, y).toFixed(2);
-        }
+    if (operator === "/" && y == 0) {
+        display1.innerHTML = "";
+        display2.innerHTML = "NOPE :D";
+    } else {
+        usedEqual = true;
+        if (display2.innerHTML.slice(x.toString().length+1, display2.innerHTML.length) != ""){
+            if (typeof(x) == String) {
+                y = +display2.innerHTML.slice(x.length+1, display2.innerHTML.length);
+            } else {
+                y = +display2.innerHTML.slice(x.toString().length+1, display2.innerHTML.length);
+            }
 
-        if (opCount === 1) {
-            display1.innerHTML += x;
+            result = operate(operator, x, y);
+            if (Number.isInteger(result)) {
+                display2.innerHTML = operate(operator, x, y);
+            } else {
+                display2.innerHTML = operate(operator, x, y).toFixed(2);
+            }
+
+            if (opCount === 1) {
+                display1.innerHTML += x;
+            }
+            display1.innerHTML += operator + y;
         }
-        display1.innerHTML += operator + y;
     }
-
 
 } , false);
 
@@ -142,4 +152,5 @@ function clear () {
     operator = "";
     opCount = 0;
     displayValue = 0;
+    usedEqual = false;
 }
