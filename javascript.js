@@ -22,7 +22,7 @@ for (let i = 0; i < calcButtons.length; i++) {
     calcButtons[i].addEventListener('click', function () {
         changeDisplayValue(calcButtons[i].innerHTML);
         if (operator != "") {
-            y = +display2.innerHTML.slice(x.toString.length + 1, display2.innerHTML.length);
+            y = +display2.innerHTML.slice(x.toString().length + 1, display2.innerHTML.length);
         }
     }, false);
 }
@@ -36,11 +36,15 @@ for (let i = 0; i < operators.length; i++) {
             operator = operators[i].innerHTML;
             display2.innerHTML += operator;
         } else {
+            if (display1.innerHTML == "") {
+                display1.innerHTML = display2.innerHTML;
+            }
             
-            display1.innerHTML = display2.innerHTML;
-            
-            y = +display2.innerHTML.slice(x.length+1, display2.innerHTML.length);
-            
+            if (typeof(x) == "string") {
+                y = +display2.innerHTML.slice(x.length+1, display2.innerHTML.length);
+            } else {
+                y = +display2.innerHTML.slice(x.toString().length+1, display2.innerHTML.length);
+            }
             x = +operate(operator, +x, +y);
             operator = operators[i].innerHTML;
             display2.innerHTML = x + operator;
@@ -51,12 +55,17 @@ for (let i = 0; i < operators.length; i++) {
 let equal = document.querySelector(".equal");
 
 equal.addEventListener("click", function () {
-    if (typeof(x) == String) {
-        y = +display2.innerHTML.slice(x.length+1, display2.innerHTML.length);
-    } else {
-        y = +display2.innerHTML.slice(x.toString.length+1, display2.innerHTML.length);
+    if (display2.innerHTML.slice(x.toString().length+1, display2.innerHTML.length) != ""){
+        if (typeof(x) == String) {
+            y = +display2.innerHTML.slice(x.length+1, display2.innerHTML.length);
+        } else {
+            y = +display2.innerHTML.slice(x.toString().length+1, display2.innerHTML.length);
+        }
+        display2.innerHTML = operate(operator, x, y);
+        display1.innerHTML += operator + y;
     }
-    display2.innerHTML = operate(operator, x, y);
+
+
 } , false);
 
 
