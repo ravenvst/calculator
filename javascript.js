@@ -3,6 +3,7 @@ let y = 0;
 let operator = "";
 let displayValue = 0;
 let result; 
+let opCount = 0;
 
 let display2 = document.getElementById("display2")
 display2.innerHTML = displayValue;
@@ -32,6 +33,7 @@ let operators = document.querySelectorAll(".operator");
 
 for (let i = 0; i < operators.length; i++) {
     operators[i].addEventListener('click', function () {
+        opCount ++;
         if (display2.innerHTML.slice(x.toString().length, display2.innerHTML.length) !== "*" &&
             display2.innerHTML.slice(x.toString().length, display2.innerHTML.length) !== "/" &&
             display2.innerHTML.slice(x.toString().length, display2.innerHTML.length) !== "+" &&
@@ -79,7 +81,9 @@ equal.addEventListener("click", function () {
             display2.innerHTML = operate(operator, x, y).toFixed(2);
         }
 
-        
+        if (opCount === 1) {
+            display1.innerHTML += x;
+        }
         display1.innerHTML += operator + y;
     }
 
