@@ -48,6 +48,14 @@ main {
 }
 
 
-.clear {
+.red-button {
     background-color: rgba(255, 180, 180, 0.678);
+}
+
+.wide {
+    width: 46%;
+}
+
+.operator {
+    background-color: rgb(126, 173, 207);
 }
