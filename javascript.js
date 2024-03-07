@@ -10,7 +10,7 @@ let display2 = document.getElementById("display2")
 display2.innerHTML = displayValue;
 
 function changeDisplayValue(btnText){
-    if (display2.innerHTML === 0) {
+    if (display2.innerHTML === "0") {
         display2.innerHTML = btnText;
         displayValue = btnText;
     } else {
