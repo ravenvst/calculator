@@ -30,6 +30,17 @@ for (let i = 0; i < calcButtons.length; i++) {
     }, false);
 }
 
+let dot = document.querySelector(".dot");
+dot.addEventListener("click", function () {
+    if (display2.innerHTML.includes(".") == false){
+    display2.innerHTML += ".";
+    displayValue = display2.innerHTML;
+    } else if (opCount > 0 && y.toString().includes(".") == false) {
+        display2.innerHTML += ".";
+    }
+});
+
+
 let operators = document.querySelectorAll(".operator");
 
 for (let i = 0; i < operators.length; i++) {

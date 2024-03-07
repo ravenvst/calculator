@@ -22,6 +22,10 @@ main {
     text-align: right;
 }
 
+#display1 {
+    font-size: 30px;
+}
+
 
 .keys {
    flex-wrap: wrap;
